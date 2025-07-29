@@ -92,3 +92,16 @@ export {
   RATE_LIMITS,
   PAGINATION,
 } from './constants';
+
+// Export API types
+export type {
+  PSGCError,
+  ApiResponse,
+  CacheConfig,
+  RateLimitConfig,
+  RetryConfig,
+  ContentType,
+  ApiEndpoint,
+  HttpMethod,
+  RequestOptions,
+} from './api.types';

@@ -146,6 +146,10 @@ export const GetHierarchyParamsSchema = z.object({
   code: z.string().min(1, 'Code cannot be empty'),
 });
 
+// Additional schemas for search tools
+export const GeographicCodeSchema = z.string().min(1, 'Code cannot be empty');
+export const SearchNameSchema = z.string().min(1, 'Search name cannot be empty');
+
 // Response validation schemas
 export const IslandGroupSchema = z.object({
   code: IslandGroupCodeSchema,
