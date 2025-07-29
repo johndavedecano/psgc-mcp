@@ -97,6 +97,7 @@ Add to your Claude Desktop configuration:
     "region_code": "130000000"
   }
 }
+```
 
 ### Search by Name
 ```json
