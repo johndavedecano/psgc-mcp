@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { z } from 'zod';
 import {
   IslandGroup,
   Region,
@@ -10,8 +9,8 @@ import {
   CityMunicipality,
   SubMunicipality,
   Barangay,
+  API_CONFIG,
 } from '../types';
-// Remove unused import
 
 /**
  * Configuration for PSGC API client
@@ -57,11 +56,11 @@ export class PSGCClient {
 
   constructor(config: PSGCClientConfig = {}) {
     this.config = {
-      baseURL: config.baseURL || 'https://psgc.gitlab.io/api',
-      timeout: config.timeout || 30000,
-      retries: config.retries || 3,
-      retryDelay: config.retryDelay || 1000,
-      cacheTTL: config.cacheTTL || 5 * 60 * 1000, // 5 minutes default
+      baseURL: config.baseURL || API_CONFIG.BASE_URL,
+      timeout: config.timeout || API_CONFIG.DEFAULT_TIMEOUT,
+      retries: config.retries || API_CONFIG.MAX_RETRIES,
+      retryDelay: config.retryDelay || API_CONFIG.RETRY_DELAY,
+      cacheTTL: config.cacheTTL || API_CONFIG.CACHE_TTL,
     };
 
     this.client = axios.create({
@@ -146,7 +145,6 @@ export class PSGCClient {
    * Clear expired cache entries
    */
   private clearExpiredCache(): void {
-    const now = Date.now();
     for (const [key, entry] of this.cache.entries()) {
       if (!this.isCacheValid(entry.timestamp)) {
         this.cache.delete(key);

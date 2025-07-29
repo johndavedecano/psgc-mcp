@@ -1,9 +1,8 @@
-import { z } from 'zod';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { PSGCClient } from '../services/psgc-client.js';
 import { IslandGroupCodeSchema } from '../types/validation.schemas.js';
 
-export function registerIslandGroupTools(server: McpServer, psgcClient: PSGCClient) {
+export function registerIslandGroupTools(server: McpServer, psgcClient: PSGCClient): void {
   // 4.1.1 List all island groups
   server.tool('get_island_groups', 'List all island groups in the Philippines', {}, async () => {
     try {

@@ -1,13 +1,14 @@
-import { z } from 'zod';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { z } from 'zod';
 import { PSGCClient } from '../services/psgc-client.js';
+import type { Region, Province, City, Municipality, Barangay } from '../types';
 import {
   GeographicCodeSchema,
   EntityTypeSchema,
   SearchNameSchema,
 } from '../types/validation.schemas.js';
 
-export function registerSearchTools(server: McpServer, psgcClient: PSGCClient) {
+export function registerSearchTools(server: McpServer, psgcClient: PSGCClient): void {
   // 4.8.1 Search entities by name across all levels
   server.tool(
     'search_by_name',
@@ -20,51 +21,53 @@ export function registerSearchTools(server: McpServer, psgcClient: PSGCClient) {
     async ({ name, type, limit }) => {
       try {
         const searchLimit = limit || 10;
-        const results: any[] = [];
+        const results: Array<Record<string, unknown>> = [];
 
         // Search in regions
         if (!type || type === 'region') {
           const regions = await psgcClient.getRegions();
           const matching = regions
-            .filter((r: any) => r.name.toLowerCase().includes(name.toLowerCase()))
+            .filter((r: Region) => r.name.toLowerCase().includes(name.toLowerCase()))
             .slice(0, searchLimit);
-          results.push(...matching.map((r: any) => ({ ...r, entityType: 'region' })));
+          results.push(...matching.map((r: Region) => ({ ...r, entityType: 'region' })));
         }
 
         // Search in provinces
         if (!type || type === 'province') {
           const provinces = await psgcClient.getProvinces();
           const matching = provinces
-            .filter((p: any) => p.name.toLowerCase().includes(name.toLowerCase()))
+            .filter((p: Province) => p.name.toLowerCase().includes(name.toLowerCase()))
             .slice(0, searchLimit);
-          results.push(...matching.map((p: any) => ({ ...p, entityType: 'province' })));
+          results.push(...matching.map((p: Province) => ({ ...p, entityType: 'province' })));
         }
 
         // Search in cities
         if (!type || type === 'city') {
           const cities = await psgcClient.getCities();
           const matching = cities
-            .filter((c: any) => c.name.toLowerCase().includes(name.toLowerCase()))
+            .filter((c: City) => c.name.toLowerCase().includes(name.toLowerCase()))
             .slice(0, searchLimit);
-          results.push(...matching.map((c: any) => ({ ...c, entityType: 'city' })));
+          results.push(...matching.map((c: City) => ({ ...c, entityType: 'city' })));
         }
 
         // Search in municipalities
         if (!type || type === 'municipality') {
           const municipalities = await psgcClient.getMunicipalities();
           const matching = municipalities
-            .filter((m: any) => m.name.toLowerCase().includes(name.toLowerCase()))
+            .filter((m: Municipality) => m.name.toLowerCase().includes(name.toLowerCase()))
             .slice(0, searchLimit);
-          results.push(...matching.map((m: any) => ({ ...m, entityType: 'municipality' })));
+          results.push(
+            ...matching.map((m: Municipality) => ({ ...m, entityType: 'municipality' }))
+          );
         }
 
         // Search in barangays
         if (!type || type === 'barangay') {
           const barangays = await psgcClient.getBarangays();
           const matching = barangays
-            .filter((b: any) => b.name.toLowerCase().includes(name.toLowerCase()))
+            .filter((b: Barangay) => b.name.toLowerCase().includes(name.toLowerCase()))
             .slice(0, searchLimit);
-          results.push(...matching.map((b: any) => ({ ...b, entityType: 'barangay' })));
+          results.push(...matching.map((b: Barangay) => ({ ...b, entityType: 'barangay' })));
         }
 
         return {
@@ -98,7 +101,11 @@ export function registerSearchTools(server: McpServer, psgcClient: PSGCClient) {
     },
     async ({ code }) => {
       try {
-        const hierarchy: any = {
+        const hierarchy: {
+          code: string;
+          entityType?: string;
+          levels: Array<{ type: string; data: unknown }>;
+        } = {
           code,
           levels: [],
         };
@@ -127,7 +134,7 @@ export function registerSearchTools(server: McpServer, psgcClient: PSGCClient) {
 
         // Build hierarchy based on entity type
         switch (entityType) {
-          case 'barangay':
+          case 'barangay': {
             const barangay = await psgcClient.getBarangay(codeStr);
             hierarchy.levels.unshift({ type: 'barangay', data: barangay });
 
@@ -150,13 +157,14 @@ export function registerSearchTools(server: McpServer, psgcClient: PSGCClient) {
               // Get island group
               const islandGroup = await psgcClient.getIslandGroup(region.islandGroupCode);
               hierarchy.levels.unshift({ type: 'island_group', data: islandGroup });
-            } catch (e) {
+            } catch {
               // Handle cases where parent entities might not exist
             }
             break;
+          }
 
           case 'city':
-          case 'municipality':
+          case 'municipality': {
             const cityMunicipality = await psgcClient.getCityMunicipality(codeStr);
             hierarchy.levels.unshift({ type: 'city/municipality', data: cityMunicipality });
 
@@ -174,8 +182,9 @@ export function registerSearchTools(server: McpServer, psgcClient: PSGCClient) {
             const islandGroup2 = await psgcClient.getIslandGroup(region2.islandGroupCode);
             hierarchy.levels.unshift({ type: 'island_group', data: islandGroup2 });
             break;
+          }
 
-          case 'province':
+          case 'province': {
             const province3 = await psgcClient.getProvince(codeStr);
             hierarchy.levels.unshift({ type: 'province', data: province3 });
 
@@ -188,8 +197,9 @@ export function registerSearchTools(server: McpServer, psgcClient: PSGCClient) {
             const islandGroup3 = await psgcClient.getIslandGroup(region3.islandGroupCode);
             hierarchy.levels.unshift({ type: 'island_group', data: islandGroup3 });
             break;
+          }
 
-          case 'region':
+          case 'region': {
             const regionData = await psgcClient.getRegion(codeStr);
             hierarchy.levels.unshift({ type: 'region', data: regionData });
 
@@ -197,6 +207,7 @@ export function registerSearchTools(server: McpServer, psgcClient: PSGCClient) {
             const islandGroupData = await psgcClient.getIslandGroup(regionData.islandGroupCode);
             hierarchy.levels.unshift({ type: 'island_group', data: islandGroupData });
             break;
+          }
         }
 
         return {
@@ -233,7 +244,7 @@ export function registerSearchTools(server: McpServer, psgcClient: PSGCClient) {
         const codeStr = String(code);
         let entityType: string | null = null;
         let exists = false;
-        let data: any = null;
+        let data: unknown = null;
 
         // Determine entity type based on code pattern
         if (codeStr.length === 9) {
@@ -242,7 +253,7 @@ export function registerSearchTools(server: McpServer, psgcClient: PSGCClient) {
             try {
               data = await psgcClient.getRegion(codeStr);
               exists = true;
-            } catch (e) {
+            } catch {
               exists = false;
             }
           } else if (codeStr.endsWith('000')) {
@@ -251,7 +262,7 @@ export function registerSearchTools(server: McpServer, psgcClient: PSGCClient) {
               try {
                 data = await psgcClient.getProvince(codeStr);
                 exists = true;
-              } catch (e) {
+              } catch {
                 exists = false;
               }
             } else {
@@ -259,7 +270,7 @@ export function registerSearchTools(server: McpServer, psgcClient: PSGCClient) {
               try {
                 data = await psgcClient.getCityMunicipality(codeStr);
                 exists = true;
-              } catch (e) {
+              } catch {
                 exists = false;
               }
             }
@@ -268,7 +279,7 @@ export function registerSearchTools(server: McpServer, psgcClient: PSGCClient) {
             try {
               data = await psgcClient.getBarangay(codeStr);
               exists = true;
-            } catch (e) {
+            } catch {
               exists = false;
             }
           }

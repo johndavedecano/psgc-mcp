@@ -1,9 +1,8 @@
-import { z } from 'zod';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { PSGCClient } from '../services/psgc-client.js';
 import { ProvinceCodeSchema } from '../types/validation.schemas.js';
 
-export function registerProvinceTools(server: McpServer, psgcClient: PSGCClient) {
+export function registerProvinceTools(server: McpServer, psgcClient: PSGCClient): void {
   // 4.3.1 List all provinces
   server.tool('get_provinces', 'List all provinces in the Philippines', {}, async () => {
     try {

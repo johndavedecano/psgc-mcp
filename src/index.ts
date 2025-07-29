@@ -31,7 +31,7 @@ registerDistrictTools(server, psgcClient);
 registerSearchTools(server, psgcClient);
 
 // Start receiving messages on stdin and sending messages on stdout
-async function main() {
+async function main(): Promise<void> {
   const transport = new StdioServerTransport();
   await server.connect(transport);
 }

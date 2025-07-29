@@ -32,17 +32,6 @@ export const GEOGRAPHIC_CODES = {
     /** 9-digit code with no specific pattern (barangays) */
     BARANGAY: /^\d{9}$/,
   },
-
-  /** Code prefixes for different entity types */
-  PREFIXES: {
-    REGION: '000000000',
-    PROVINCE: '000000000',
-    DISTRICT: '000000000',
-    CITY: '000000000',
-    MUNICIPALITY: '000000000',
-    SUB_MUNICIPALITY: '000000000',
-    BARANGAY: '000000000',
-  },
 } as const;
 
 // Entity type mappings

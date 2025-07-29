@@ -1,9 +1,8 @@
-import { z } from 'zod';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { PSGCClient } from '../services/psgc-client.js';
 import { RegionCodeSchema } from '../types/validation.schemas.js';
 
-export function registerRegionTools(server: McpServer, psgcClient: PSGCClient) {
+export function registerRegionTools(server: McpServer, psgcClient: PSGCClient): void {
   // 4.2.1 List all regions
   server.tool('get_regions', 'List all regions in the Philippines', {}, async () => {
     try {

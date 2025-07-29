@@ -1,9 +1,8 @@
-import { z } from 'zod';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { PSGCClient } from '../services/psgc-client.js';
 import { DistrictCodeSchema } from '../types/validation.schemas.js';
 
-export function registerDistrictTools(server: McpServer, psgcClient: PSGCClient) {
+export function registerDistrictTools(server: McpServer, psgcClient: PSGCClient): void {
   // 4.7.1 List all districts
   server.tool('get_districts', 'List all districts in the Philippines', {}, async () => {
     try {

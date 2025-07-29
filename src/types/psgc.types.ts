@@ -3,6 +3,8 @@
  * Based on the official PSGC API OpenAPI specification from https://psgc.gitlab.io/api/docs.json
  */
 
+import type { EntityType } from './validation.schemas';
+
 // Base interface for all geographic entities
 export interface GeographicEntity {
   /** Unique code identifier */
@@ -178,17 +180,7 @@ export interface SearchResult {
   readonly score?: number;
 }
 
-// Entity type discriminator
-export type EntityType =
-  | 'island-group'
-  | 'region'
-  | 'province'
-  | 'district'
-  | 'city'
-  | 'municipality'
-  | 'city-municipality'
-  | 'sub-municipality'
-  | 'barangay';
+// EntityType is now imported from validation.schemas.ts to ensure consistency
 
 // Parameter types for API calls
 export interface IslandGroupParams {

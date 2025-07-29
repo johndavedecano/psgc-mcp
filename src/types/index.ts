@@ -18,23 +18,22 @@ export type {
   PSGCApiError,
   GeographicHierarchy,
   SearchResult,
-  EntityType,
-  // Parameter types
-  IslandGroupParams,
-  RegionParams,
-  ProvinceParams,
-  DistrictParams,
-  CityParams,
-  MunicipalityParams,
-  SubMunicipalityParams,
-  CityMunicipalityParams,
-  BarangayParams,
-  SearchByNameParams,
-  ValidateCodeParams,
-  GetHierarchyParams,
+  // Parameter types from psgc.types (interfaces)
+  IslandGroupParams as IslandGroupParamsInterface,
+  RegionParams as RegionParamsInterface,
+  ProvinceParams as ProvinceParamsInterface,
+  DistrictParams as DistrictParamsInterface,
+  CityParams as CityParamsInterface,
+  MunicipalityParams as MunicipalityParamsInterface,
+  SubMunicipalityParams as SubMunicipalityParamsInterface,
+  CityMunicipalityParams as CityMunicipalityParamsInterface,
+  BarangayParams as BarangayParamsInterface,
+  SearchByNameParams as SearchByNameParamsInterface,
+  ValidateCodeParams as ValidateCodeParamsInterface,
+  GetHierarchyParams as GetHierarchyParamsInterface,
 } from './psgc.types';
 
-// Export validation schemas
+// Export validation schemas and their inferred types (preferred)
 export {
   IslandGroupCodeSchema,
   RegionCodeSchema,
@@ -78,6 +77,24 @@ export {
   SubMunicipalitiesResponseSchema,
   CityMunicipalitiesResponseSchema,
   BarangaysResponseSchema,
+} from './validation.schemas';
+
+// Export inferred types from validation schemas (these are the preferred types to use)
+export type {
+  IslandGroupCode,
+  EntityType,
+  IslandGroupParams,
+  RegionParams,
+  ProvinceParams,
+  DistrictParams,
+  CityParams,
+  MunicipalityParams,
+  SubMunicipalityParams,
+  CityMunicipalityParams,
+  BarangayParams,
+  SearchByNameParams,
+  ValidateCodeParams,
+  GetHierarchyParams,
 } from './validation.schemas';
 
 // Export constants

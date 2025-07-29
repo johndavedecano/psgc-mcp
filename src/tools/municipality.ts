@@ -1,9 +1,8 @@
-import { z } from 'zod';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { PSGCClient } from '../services/psgc-client.js';
 import { MunicipalityCodeSchema } from '../types/validation.schemas.js';
 
-export function registerMunicipalityTools(server: McpServer, psgcClient: PSGCClient) {
+export function registerMunicipalityTools(server: McpServer, psgcClient: PSGCClient): void {
   // 4.5.1 List all municipalities
   server.tool('get_municipalities', 'List all municipalities in the Philippines', {}, async () => {
     try {

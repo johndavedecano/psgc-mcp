@@ -4,22 +4,10 @@
  */
 
 import { z } from 'zod';
-import type { IslandGroup } from './psgc.types';
+import { GEOGRAPHIC_CODES } from './constants';
 
-// Base code validation patterns
-const CODE_PATTERNS = {
-  /** 9-digit numeric code */
-  NINE_DIGIT: /^\d{9}$/,
-  /** 9-digit code ending with 6 zeros (regions, provinces, districts) */
-  SIX_ZEROS: /^\d{3}000000$/,
-  /** 9-digit code ending with 3 zeros (cities, municipalities, sub-municipalities) */
-  THREE_ZEROS: /^\d{6}000$/,
-  /** 9-digit code with no specific pattern (barangays) */
-  BARANGAY: /^\d{9}$/,
-} as const;
-
-// Island group codes
-const ISLAND_GROUP_CODES = ['luzon', 'visayas', 'mindanao'] as const;
+// Use constants from constants.ts for consistency
+const { PATTERNS: CODE_PATTERNS, ISLAND_GROUPS: ISLAND_GROUP_CODES } = GEOGRAPHIC_CODES;
 
 // Entity type enum
 export const EntityTypeSchema = z.enum([

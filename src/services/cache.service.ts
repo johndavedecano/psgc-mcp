@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
-import path from 'path';
 import os from 'os';
-import { CacheConfig } from '../types/api.types';
+import path from 'path';
+import { CacheConfig, API_CONFIG } from '../types';
 
 /**
  * Cache service for storing API responses
@@ -66,7 +66,7 @@ export class CacheService {
           // Remove expired cache file
           await fs.unlink(filePath);
         }
-      } catch (error) {
+      } catch {
         // File doesn't exist or is invalid
       }
     }
@@ -109,7 +109,7 @@ export class CacheService {
       try {
         const filePath = path.join(this.cacheDir, this.generateKey(key));
         await fs.unlink(filePath);
-      } catch (error) {
+      } catch {
         // File doesn't exist
       }
     }
@@ -135,8 +135,6 @@ export class CacheService {
    * Clean up expired cache entries
    */
   async cleanup(): Promise<void> {
-    const now = Date.now();
-
     // Clean memory cache
     for (const [key, entry] of this.memoryCache.entries()) {
       if (!this.isValid(entry.timestamp)) {
@@ -157,7 +155,7 @@ export class CacheService {
               if (!this.isValid(parsed.timestamp)) {
                 await fs.unlink(filePath);
               }
-            } catch (error) {
+            } catch {
               // Invalid file, remove it
               await fs.unlink(filePath);
             }
@@ -183,7 +181,7 @@ export class CacheService {
       try {
         const files = await fs.readdir(this.cacheDir);
         diskEntries = files.length;
-      } catch (error) {
+      } catch {
         // Directory doesn't exist
       }
     }
@@ -198,7 +196,7 @@ export class CacheService {
 
 // Export singleton instance
 export const cacheService = new CacheService({
-  ttl: 5 * 60 * 1000, // 5 minutes
+  ttl: API_CONFIG.CACHE_TTL,
   maxSize: 1000, // Maximum 1000 entries
   persist: true, // Persist to disk
 });

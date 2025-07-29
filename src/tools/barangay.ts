@@ -1,9 +1,8 @@
-import { z } from 'zod';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { PSGCClient } from '../services/psgc-client.js';
 import { BarangayCodeSchema } from '../types/validation.schemas.js';
 
-export function registerBarangayTools(server: McpServer, psgcClient: PSGCClient) {
+export function registerBarangayTools(server: McpServer, psgcClient: PSGCClient): void {
   // 4.6.1 List all barangays
   server.tool('get_barangays', 'List all barangays in the Philippines', {}, async () => {
     try {
