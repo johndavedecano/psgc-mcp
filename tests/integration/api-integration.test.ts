@@ -57,13 +57,14 @@ describe('PSGC API Integration', () => {
     });
 
     it('should fetch provinces in a region', async () => {
-      const provinces = await client.getRegionProvinces('130000000');
+      // Use Region I (Ilocos Region) instead of NCR since NCR has no provinces
+      const provinces = await client.getRegionProvinces('010000000');
 
       expect(provinces).toBeInstanceOf(Array);
       expect(provinces.length).toBeGreaterThan(0);
       expect(provinces[0]).toHaveProperty('code');
       expect(provinces[0]).toHaveProperty('name');
-      expect(provinces[0]).toHaveProperty('regionCode', '130000000');
+      expect(provinces[0]).toHaveProperty('regionCode', '010000000');
     });
   });
 
