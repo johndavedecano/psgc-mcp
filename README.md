@@ -168,7 +168,7 @@ The server provides a comprehensive set of tools for accessing PSGC data, catego
 
 ### Get Provinces in a Region
 
-````json
+```json
 {
   "tool": "get_provinces",
   "arguments": {
@@ -178,6 +178,7 @@ The server provides a comprehensive set of tools for accessing PSGC data, catego
 ```
 
 ### Search by Name
+
 ```json
 {
   "tool": "search_by_name",
@@ -186,7 +187,7 @@ The server provides a comprehensive set of tools for accessing PSGC data, catego
     "type": "city"
   }
 }
-````
+```
 
 ### Get Complete Hierarchy
 
