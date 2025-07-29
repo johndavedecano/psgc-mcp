@@ -4,7 +4,7 @@
  */
 
 import { z } from 'zod';
-import { GEOGRAPHIC_CODES } from './constants';
+import { GEOGRAPHIC_CODES } from './constants.js';
 
 // Use constants from constants.ts for consistency
 const { PATTERNS: CODE_PATTERNS, ISLAND_GROUPS: ISLAND_GROUP_CODES } = GEOGRAPHIC_CODES;

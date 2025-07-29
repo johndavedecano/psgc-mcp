@@ -77,7 +77,7 @@ export {
   SubMunicipalitiesResponseSchema,
   CityMunicipalitiesResponseSchema,
   BarangaysResponseSchema,
-} from './validation.schemas';
+} from './validation.schemas.js';
 
 // Export inferred types from validation schemas (these are the preferred types to use)
 export type {
@@ -95,7 +95,7 @@ export type {
   SearchByNameParams,
   ValidateCodeParams,
   GetHierarchyParams,
-} from './validation.schemas';
+} from './validation.schemas.js';
 
 // Export constants
 export {
@@ -108,7 +108,7 @@ export {
   CACHE_KEYS,
   RATE_LIMITS,
   PAGINATION,
-} from './constants';
+} from './constants.js';
 
 // Export API types
 export type {
@@ -121,4 +121,4 @@ export type {
   ApiEndpoint,
   HttpMethod,
   RequestOptions,
-} from './api.types';
+} from './api.types.js';

@@ -10,7 +10,7 @@ import {
   SubMunicipality,
   Barangay,
   API_CONFIG,
-} from '../types';
+} from '../types/index.js';
 
 /**
  * Configuration for PSGC API client

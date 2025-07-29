@@ -2,7 +2,7 @@
  * Environment configuration for PSGC MCP Server
  */
 
-import { API_CONFIG } from '../types';
+import { API_CONFIG } from '../types/index.js';
 
 export interface Config {
   api: {

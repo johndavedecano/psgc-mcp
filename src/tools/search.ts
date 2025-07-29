@@ -1,7 +1,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { PSGCClient } from '../services/psgc-client.js';
-import type { Region, Province, City, Municipality, Barangay } from '../types';
+import type { Region, Province, City, Municipality, Barangay } from '../types/index.js';
 import {
   GeographicCodeSchema,
   EntityTypeSchema,

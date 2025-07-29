@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import os from 'os';
 import path from 'path';
-import { CacheConfig, API_CONFIG } from '../types';
+import { CacheConfig, API_CONFIG } from '../types/index.js';
 
 /**
  * Cache service for storing API responses
