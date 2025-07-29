@@ -1,0 +1,73 @@
+{
+  "name": "psgc-mcp",
+  "version": "1.0.0",
+  "description": "Philippine Standard Geographic Code MCP Server - provides hierarchical geographic data for the Philippines",
+  "keywords": [
+    "mcp",
+    "modelcontextprotocol",
+    "server",
+    "philippines",
+    "geographic",
+    "psgc",
+    "regions",
+    "provinces",
+    "cities",
+    "barangays"
+  ],
+  "homepage": "https://github.com/your-username/psgc-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/your-username/psgc-mcp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/psgc-mcp.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "psgc-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "prepublishOnly": "npm run build",
+    "inspect": "npx @modelcontextprotocol/inspector node dist/index.js",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
+    "test:ui": "vitest --ui",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "format": "prettier --write \"src/**/*.{ts,js,json,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,js,json,md}\"",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.0",
+    "axios": "^1.11.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/ui": "^3.2.4",
+    "eslint": "^9.32.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.3",
+    "prettier": "^3.6.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4",
+    "vitest-mock-extended": "^3.1.0"
+  }
+}
