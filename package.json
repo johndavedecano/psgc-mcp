@@ -1,6 +1,6 @@
 {
   "name": "psgc-mcp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Philippine Standard Geographic Code MCP Server - provides hierarchical geographic data for the Philippines",
   "keywords": [
     "mcp",
@@ -14,16 +14,16 @@
     "cities",
     "barangays"
   ],
-  "homepage": "https://github.com/your-username/psgc-mcp#readme",
+  "homepage": "https://github.com/decano/psgc-mcp#readme",
   "bugs": {
-    "url": "https://github.com/your-username/psgc-mcp/issues"
+    "url": "https://github.com/decano/psgc-mcp/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-username/psgc-mcp.git"
+    "url": "git+https://github.com/decano/psgc-mcp.git"
   },
   "license": "ISC",
-  "author": "",
+  "author": "decano",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
