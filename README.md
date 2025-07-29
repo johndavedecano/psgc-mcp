@@ -61,21 +61,99 @@ Add to your Claude Desktop configuration:
 
 ## Available Tools
 
-### Geographic Entity Tools
+The server provides a comprehensive set of tools for accessing PSGC data, categorized by geographic level.
 
-- `get_island_groups` - List all island groups (Luzon, Visayas, Mindanao)
-- `get_regions` - List all regions
-- `get_provinces` - List all provinces or provinces in a specific region
-- `get_cities` - List all cities or cities in a specific province
-- `get_municipalities` - List all municipalities or municipalities in a specific province
-- `get_barangays` - List all barangays or barangays in a specific city/municipality
-- `get_districts` - List all districts or districts in a specific region
+### Island Group Tools
 
-### Search and Discovery
+- `get_island_groups`: List all island groups.
+- `get_island_group`: Get a specific island group by its code (e.g., `"luzon"`).
+- `get_island_group_regions`: Get all regions within a specific island group.
+- `get_island_group_provinces`: Get all provinces within a specific island group.
+- `get_island_group_districts`: Get all districts within a specific island group.
+- `get_island_group_cities`: Get all cities within a specific island group.
+- `get_island_group_municipalities`: Get all municipalities within a specific island group.
+- `get_island_group_cities_municipalities`: Get all cities and municipalities within a specific island group.
+- `get_island_group_sub_municipalities`: Get all sub-municipalities within a specific island group.
+- `get_island_group_barangays`: Get all barangays within a specific island group.
 
-- `search_by_name` - Search for geographic entities by name
-- `get_hierarchy` - Get complete hierarchy for a specific PSGC code
-- `validate_code` - Validate a PSGC code and get entity details
+### Region Tools
+
+- `get_regions`: List all regions.
+- `get_region`: Get a specific region by its code (e.g., `"130000000"`).
+- `get_region_provinces`: Get all provinces within a specific region.
+- `get_region_districts`: Get all districts within a specific region.
+- `get_region_cities`: Get all cities within a specific region.
+- `get_region_municipalities`: Get all municipalities within a specific region.
+- `get_region_cities_municipalities`: Get all cities and municipalities within a specific region.
+- `get_region_sub_municipalities`: Get all sub-municipalities within a specific region.
+- `get_region_barangays`: Get all barangays within a specific region.
+
+### Province Tools
+
+- `get_provinces`: List all provinces.
+- `get_province`: Get a specific province by its code (e.g., `"012800000"`).
+- `get_province_cities`: Get all cities within a specific province.
+- `get_province_municipalities`: Get all municipalities within a specific province.
+- `get_province_cities_municipalities`: Get all cities and municipalities within a specific province.
+- `get_province_sub_municipalities`: Get all sub-municipalities within a specific province.
+- `get_province_barangays`: Get all barangays within a specific province.
+
+### District Tools
+
+- `get_districts`: List all districts.
+- `get_district`: Get a specific district by its code (e.g., `"133900000"`).
+- `get_district_cities`: Get all cities within a specific district.
+- `get_district_municipalities`: Get all municipalities within a specific district.
+- `get_district_cities_municipalities`: Get all cities and municipalities within a specific district.
+- `get_district_sub_municipalities`: Get all sub-municipalities within a specific district.
+- `get_district_barangays`: Get all barangays within a specific district.
+
+### City Tools
+
+- `get_cities`: List all cities.
+- `get_city`: Get a specific city by its code (e.g., `"012805000"`).
+- `get_city_barangays`: Get all barangays within a specific city.
+
+### Municipality Tools
+
+- `get_municipalities`: List all municipalities.
+- `get_municipality`: Get a specific municipality by its code (e.g., `"012801000"`).
+- `get_municipality_barangays`: Get all barangays within a specific municipality.
+
+### Sub-Municipality Tools
+
+- `get_sub_municipalities`: List all sub-municipalities.
+- `get_sub_municipality`: Get a specific sub-municipality by its code (e.g., `"133901000"`).
+- `get_sub_municipality_barangays`: Get all barangays within a specific sub-municipality.
+
+### Combined City/Municipality Tools
+
+- `get_cities_municipalities`: List all cities and municipalities.
+- `get_city_municipality`: Get a specific city or municipality by its code.
+- `get_city_municipality_barangays`: Get all barangays within a specific city or municipality.
+
+### Barangay Tools
+
+- `get_barangays`: List all barangays.
+- `get_barangay`: Get a specific barangay by its code (e.g., `"012805001"`).
+
+### Search and Discovery Tools
+
+- `search_by_name`: Search for geographic entities by name across all levels.
+- `get_hierarchy`: Get the complete hierarchy for a specific PSGC code.
+- `validate_code`: Validate if a geographic code exists and get its details.
+
+## Available Resources
+
+- **Static Data**: Access pre-loaded static data for all geographic levels.
+- **Dynamic Queries**: Perform parameterized queries to fetch specific datasets.
+- **Hierarchical Data**: Use resource templates to retrieve complete hierarchical information for any given PSGC code.
+
+## Available Templates (Prompts)
+
+- **Common Queries**: Use pre-defined prompts for common geographic questions (e.g., "What is the capital of [province]?").
+- **Guided Discovery**: Interactive prompts to help you explore the geographic hierarchy.
+- **Data Validation**: Prompts to validate PSGC codes and geographic names.
 
 ## Usage Examples
 
